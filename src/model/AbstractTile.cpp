@@ -1,6 +1,6 @@
 #include <vector>
 #include "utils/TileUtils.hpp"
-#include "management/AbstractTile.hpp"
+#include "model/AbstractTile.hpp"
 
 AbstractTile::AbstractTile() : _type(TileType::OCEAN), _associatedChar(TileUtils::initChar(" ")) {}
 
