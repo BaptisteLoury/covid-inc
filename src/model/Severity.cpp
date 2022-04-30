@@ -1,6 +1,13 @@
 #include "model/Severity.hpp"
 
 
+Severity::Severity(){
+            this->_spreadChance=100.0;
+            this->_lifetime=100.0;
+            // this->_evolveChance=50.0;
+            this->_scorePerSec=1;
+            this->_severityType=VirusSeverity::LOW;
+}
 
 Severity::Severity(VirusSeverity severityType){
     switch (severityType)
@@ -10,6 +17,7 @@ Severity::Severity(VirusSeverity severityType){
             this->_lifetime=100.0;
             // this->_evolveChance=50.0;
             this->_scorePerSec=1;
+            this->_severityType=VirusSeverity::LOW;
             
             break;
 
@@ -18,6 +26,7 @@ Severity::Severity(VirusSeverity severityType){
             this->_lifetime=100.0;
             // this->_evolveChance=50.0;
             this->_scorePerSec=1;
+            this->_severityType=VirusSeverity::MEDIUM;
             
             break;
 
@@ -27,6 +36,7 @@ Severity::Severity(VirusSeverity severityType){
             this->_lifetime=100.0;
             // this->_evolveChance=50.0;
             this->_scorePerSec=1;
+            this->_severityType=VirusSeverity::HIGH;
             
             break;
 
@@ -36,6 +46,7 @@ Severity::Severity(VirusSeverity severityType){
             this->_lifetime=100.0;
             // this->_evolveChance=50.0;
             this->_scorePerSec=1;
+            this->_severityType=VirusSeverity::LOW;
             
             break;
       }
