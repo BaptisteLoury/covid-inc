@@ -1,22 +1,19 @@
+#ifndef APPLICATION_H
+#define APPLICATION_H
+
 #include <ncurses.h>
 #include <vector>
-#include "view/AbstractWindow.hpp"
+#include "controller/MainController.hpp"
 
 class Application
 {
 private:
-    WINDOW * _map;
-    WINDOW * _legend;
-    WINDOW * _dialog;
-    WINDOW * _stats;
-    std::vector<AbstractWindow *> windows;
+    MainController * controller;
 
-    void windowsSetup();
-    void initWindows();
-    void drawBorders();
 public:
     Application();
     void run();
 };
 
 
+#endif

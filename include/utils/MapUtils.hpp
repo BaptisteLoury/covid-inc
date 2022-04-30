@@ -1,3 +1,6 @@
+#ifndef MAPUTILS_H
+#define MAPUTILS_H
+
 #include <ncurses.h>
 #include <vector>
 #include <string>
@@ -19,3 +22,4 @@ public:
 };
 
 
+#endif
