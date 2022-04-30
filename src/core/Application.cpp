@@ -3,25 +3,24 @@
 #include <vector>
 #include <iostream>
 #include "core/Application.hpp"
-#include "utils/MapUtils.hpp"
+#include "utils/WindowUtils.hpp"
 
-Application::Application() : controller(MainController::s_getSingleton()) {
+Application::Application() {
 
 }
 
 void Application::run(){
     initscr();
+    WindowUtils::initConsts();
     start_color();
     use_default_colors();
+
+    controller = MainController::s_getSingleton();
     
     while(1) {
         clear();
-        // mvwprintw(_map,0,0,"");
-        // for(int i=0; i < mapT.size(); i++) {
-        //     int x, y; // colonne et ligne
-        //     getyx(_map,y,x);
-        //     mvwprintw(_map,y+1,2,mapT[i].c_str());
-        // }
+        controller->updateGame();
+        controller->draw();
         refresh();
         if(getch() != 410)
             break;
@@ -29,6 +28,14 @@ void Application::run(){
     
     endwin();               // Restaure les paramètres par défaut du terminal
 }
+
+
+        // mvwprintw(_map,0,0,"");
+        // for(int i=0; i < mapT.size(); i++) {
+        //     int x, y; // colonne et ligne
+        //     getyx(_map,y,x);
+        //     mvwprintw(_map,y+1,2,mapT[i].c_str());
+        // }
 
 // void Application::windowsSetup() {
 //     initscr();

@@ -10,7 +10,7 @@ protected:
         WINDOW * _win;
         WindowType _type;
 public :
-        AbstractWindow(int posX, int posY, int width, int height, WindowType type);
+        AbstractWindow(WindowType type);
         WINDOW * getWindow();
         virtual void draw();
 };
