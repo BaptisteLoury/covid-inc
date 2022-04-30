@@ -21,5 +21,4 @@ public:
     vector<string> getMapTable();
 };
 
-
 #endif
