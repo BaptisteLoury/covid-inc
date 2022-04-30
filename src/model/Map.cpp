@@ -7,7 +7,7 @@ Map::Map(std::vector<std::string> charMap) {
         const char * line = charMap[i].c_str();
         std::vector<AbstractTile *> tLine;
         for(int y=0; y < charMap[i].size(); y++) {
-            addTile(i,y,tLine);
+            addTile(i,y,line[y],tLine);
         }
         _tiles.push_back(tLine);
     }
@@ -23,4 +23,8 @@ void Map::addTile(int x, int y, char c, std::vector<AbstractTile *>& v) {
         v.push_back(new OceanTile(x,y));
         break;
     }
+}
+
+std::vector<std::vector<AbstractTile *>> Map::getTiles() {
+    return _tiles;
 }

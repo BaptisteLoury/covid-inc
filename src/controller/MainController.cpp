@@ -33,4 +33,7 @@ void MainController::draw() {
 
 void MainController::updateGame() {
 
+    // MapWindow
+    dynamic_cast<MapWindow*>(_windows[0])->updateMap(_map.getTiles());
+
 }

@@ -9,4 +9,14 @@ MapWindow::MapWindow()
 
 void MapWindow::draw() {
     box(_win, ACS_VLINE, ACS_HLINE);
+    mvwprintw(_win,0,0,"");
+    for(int i=0; i < _map.size(); i++) {
+        for(int y=0; y < _map[i].size(); y++) {
+            mvwprintw(_win,i+1,y+2,_map[i][y]->getChar());
+        }
+    }
+}
+
+void MapWindow::updateMap(std::vector<std::vector<AbstractTile *>> map) {
+    _map = map;
 }

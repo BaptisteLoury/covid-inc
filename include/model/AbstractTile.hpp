@@ -20,6 +20,7 @@ public:
     int getX();
     int getY();
     virtual void draw();
+    const char * getChar();
 };
 
 #endif

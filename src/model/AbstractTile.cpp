@@ -12,3 +12,7 @@ void AbstractTile::draw() {}
 TileType AbstractTile::getType() {
     return _type;
 }
+
+const char * AbstractTile::getChar() {
+    return _associatedChar;
+}

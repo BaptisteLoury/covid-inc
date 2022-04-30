@@ -3,14 +3,15 @@
 
 #include <vector>
 #include "view/AbstractWindow.hpp"
+#include "model/AbstractTile.hpp"
 
 class MapWindow : virtual public AbstractWindow {
 private:
-        std::vector<std::vector<const char *>> _charMap;
+        std::vector<std::vector<AbstractTile *>> _map;
 public:
         MapWindow();
         void draw();
-        void updateMap(std::vector<std::vector<const char *>> charMap);
+        void updateMap(std::vector<std::vector<AbstractTile *>> map);
         void drawTiles();
 };
 
