@@ -15,6 +15,7 @@ public:
         static MainController * s_getSingleton();
         void handleEvents();
         bool isGameFinished();
+        void draw();
 };
 
 #endif

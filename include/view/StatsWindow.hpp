@@ -7,6 +7,7 @@ class StatsWindow : virtual public AbstractWindow {
 private:
 
 public:
+        StatsWindow();
         void draw();
 };
 

@@ -7,6 +7,7 @@ class LegendWindow : virtual public AbstractWindow {
 private:
 
 public:
+        LegendWindow();
         void draw();
 };
 
