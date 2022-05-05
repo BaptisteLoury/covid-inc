@@ -17,6 +17,9 @@ protected:
         int _scorePerSec;
         VirusSeverity _severityType;
 public:
+
+        Severity();
+
         /**
          * @brief Construct a new Severity object: Il prend en paramètre le type de sévérité qui ajustera les caractéristiques
          * 

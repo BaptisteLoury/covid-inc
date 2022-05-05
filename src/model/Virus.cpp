@@ -19,3 +19,35 @@ std::chrono::_V2::steady_clock::duration Virus::getLastProke() {
 void Virus::setLastProke() {
     _lastProke = _livingTime.GetElapsed();
 }
+
+Virus::Virus(){
+
+    this->_level=1;
+    this->_lowSeverity= Severity(VirusSeverity::LOW);
+    this->_mediumSeverity= Severity(VirusSeverity::MEDIUM);
+    this->_highSeverity= Severity(VirusSeverity::HIGH);
+
+}
+
+short Virus::getLevel(){
+
+    return _level;
+}
+
+void Virus::setLevel(short newLevel){
+
+   _level=newLevel;
+
+}
+
+Severity Virus::getLowSeverity(){
+    return _lowSeverity;
+}
+
+Severity Virus:: getMediumSeverity(){
+    return _mediumSeverity;
+}
+
+Severity Virus::getHighSeverity(){
+    return _highSeverity;
+}
