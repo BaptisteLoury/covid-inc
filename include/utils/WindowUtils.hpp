@@ -2,6 +2,7 @@
 #define WINDOWUTILS_H
 
 #include <ncurses.h>
+#include <vector>
 
 class WindowUtils {
 public:
@@ -26,6 +27,7 @@ public:
     static int STATS_HEIGHT;
     static int STATS_POSX;
     static int STATS_POSY;
+
 };
 
 

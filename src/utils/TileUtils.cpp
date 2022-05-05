@@ -6,3 +6,11 @@ const char * TileUtils::initChar(const std::string& c) {
     strcpy( tmp, c.c_str() );
     return tmp;
 }
+
+std::vector<std::vector<const char *>> TileUtils::CITY_ASSO = {
+        {"S","T","L"},
+        {"M","B"},
+        {"R","Y"},
+        {"J","D","C"},
+        {"N","P"}
+    };

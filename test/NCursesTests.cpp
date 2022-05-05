@@ -1,18 +1,28 @@
 #include <ncurses.h>
+#include <iostream>
+#include "../include/utils/Timer.hpp"
 
 int main() {
-    initscr();              // Initialise la structure WINDOW et autres paramètres
-    
+    initscr();
     start_color();
+    use_default_colors();
 
-    init_pair(1,COLOR_RED,COLOR_WHITE);
+    Timer timer;
+    timer.Start();
+    std::chrono::_V2::steady_clock::duration lastLoop = timer.GetElapsed();
 
-    attron(COLOR_PAIR(1));
-    mvaddch(0,0,'a');
-    attroff(COLOR_PAIR(1));
+    int i = 0;
 
+    while(1) {
+        if(timer.diffWithCurrent(lastLoop) > 100) {
+            lastLoop = timer.GetElapsed();
+            clear();
+            box(stdscr, ACS_VLINE, ACS_HLINE);
+        mvprintw(2,2,"%d",i);
+            refresh();
+        i++;
+        }
+    }
 
-    refresh();
-    getch();
-    endwin();  
+    endwin();
 }  

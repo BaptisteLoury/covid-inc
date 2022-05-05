@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <string>
+#include <ncurses.h>
 
 enum class TileType {OCEAN,LAND,CITY,SPAWN};
 
@@ -19,7 +20,7 @@ public:
     TileType getType();
     int getX();
     int getY();
-    virtual void draw();
+    virtual void draw(WINDOW * w,int x, int y);
     const char * getChar();
 };
 

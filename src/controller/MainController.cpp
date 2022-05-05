@@ -4,6 +4,7 @@
 #include "view/DialogWindow.hpp"
 #include "view/StatsWindow.hpp"
 #include "utils/MapUtils.hpp"
+#include <iostream>
 
 MainController * MainController::s_singleton = nullptr;
 
@@ -18,7 +19,7 @@ MainController::MainController() {
     _windows.push_back(new MapWindow);
     _windows.push_back(new LegendWindow);
     _windows.push_back(new DialogWindow);
-    _windows.push_back(new StatsWindow);
+    _windows.push_back(new StatsWindow(_virus));
 
     MapUtils tool;
     std::vector<std::string> stringMap = tool.getMapTable();
@@ -36,4 +37,8 @@ void MainController::updateGame() {
     // MapWindow
     dynamic_cast<MapWindow*>(_windows[0])->updateMap(_map.getTiles());
 
+}
+
+void MainController::interactWithUser() {
+    dynamic_cast<DialogWindow*>(_windows[2])->launchDialog();
 }

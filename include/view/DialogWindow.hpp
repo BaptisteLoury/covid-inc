@@ -9,6 +9,7 @@ private:
 public:
         DialogWindow();
         void draw();
+        void launchDialog();
 };
 
 #endif

@@ -12,7 +12,7 @@ protected:
 public :
         AbstractWindow(WindowType type);
         WINDOW * getWindow();
-        virtual void draw();
+        virtual void draw() = 0;
 };
 
 #endif

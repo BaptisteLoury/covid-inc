@@ -1,7 +1,11 @@
 #include "model/LandTile.hpp"
 #include <algorithm>
 
-LandTile::LandTile(int x, int y) : AbstractTile(TileType::LAND, ":", x, y) {}
+LandTile::LandTile(int x, int y) : LandTile(TileType::LAND, ":", x, y) {}
+LandTile::LandTile(TileType t, const char * c,int x, int y)
+    : AbstractTile(t, c, x, y), _virus(VirusSeverity::NONE) {}
+
+LandTile::LandTile() {}
 
 std::vector<LandTile *> LandTile::getNeighbours(std::vector<std::vector<AbstractTile *>> &carte) {
     std::vector<LandTile *> neighbours;
@@ -45,4 +49,15 @@ bool LandTile::isInfected() {
 
 VirusSeverity LandTile::getVirusSeverity() {
     return _virus;
+}
+
+void LandTile::draw(WINDOW * w,int x, int y) {
+    if(isInfected()) {
+        attron(COLOR_PAIR(0));
+        AbstractTile::draw(w,x,y);
+        attroff(COLOR_PAIR(0));
+    }
+    else {
+        AbstractTile::draw(w,x,y);
+    }
 }

@@ -11,3 +11,6 @@ DialogWindow::DialogWindow()
 void DialogWindow::draw() {
     box(_win, ACS_VLINE, ACS_HLINE);
 }
+
+void DialogWindow::launchDialog() {
+}

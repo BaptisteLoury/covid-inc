@@ -2,8 +2,12 @@
 #define APPLICATION_H
 
 #include <ncurses.h>
+#include <curses.h>
+#include <iostream>
 #include <vector>
 #include "controller/MainController.hpp"
+#include "utils/Timer.hpp"
+#include "utils/WindowUtils.hpp"
 
 class Application
 {

@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include "model/Map.hpp"
 
 Map::Map() {}
@@ -14,14 +15,25 @@ Map::Map(std::vector<std::string> charMap) {
 }
 
 void Map::addTile(int x, int y, char c, std::vector<AbstractTile *>& v) {
-    switch (c)
-    {
-    case ':':
+    if(c == ':') {
         v.push_back(new LandTile(x,y));
-        break;
-    default:
+    }
+    else if(isalpha(c)) {
+        char * tileC = new char[2];
+        tileC[0] = c;
+        tileC[1] = '\0';
+        v.push_back(new CityTile(x,y,tileC));
+    }
+    else if(isdigit(c)) {
+        char * tileC = new char[2];
+        tileC[0] = c;
+        tileC[1] = '\0';
+        v.push_back(new SpawnTile(x,y,tileC));
+        // Ajout de la case dans les cases de spawn
+        _spawnTiles.push_back(dynamic_cast<LandTile *>(v.back()));
+    }
+    else {
         v.push_back(new OceanTile(x,y));
-        break;
     }
 }
 

@@ -5,6 +5,7 @@ int WindowUtils::MAP_WIDTH = COLS;
 int WindowUtils::MAP_HEIGHT = 46;
 int WindowUtils::MAP_POSX = 0;
 int WindowUtils::MAP_POSY = 0;
+
 int WindowUtils::LEGEND_WIDTH = COLS;
 int WindowUtils::LEGEND_HEIGHT = 1;
 int WindowUtils::LEGEND_POSX = 0;
@@ -33,10 +34,3 @@ void WindowUtils::initConsts() {
     STATS_HEIGHT = LINES - 47;
     STATS_POSX = COLS/2;
 }
-
-
-
-//         _map = subwin(stdscr, 46, COLS, 0, 0);
-//         _legend = subwin(stdscr, 1, COLS, 46, 0);
-//         _dialog = subwin(stdscr, LINES - 47, COLS/2, 47, 0);
-//         _stats = subwin(stdscr, LINES - 47, COLS/2, 47, COLS/2);

@@ -4,13 +4,14 @@
 #include <vector>
 #include "view/AbstractWindow.hpp"
 #include "model/Map.hpp"
+#include "model/Virus.hpp"
 
 class MainController {
 private:
         static MainController * s_singleton;
         std::vector<AbstractWindow *> _windows;
         Map _map;
-        // VirusModel _virus;
+        Virus _virus;
 
         MainController();
 public:
@@ -19,6 +20,7 @@ public:
         bool isGameFinished();
         void draw();
         void updateGame();
+        void interactWithUser();
 };
 
 #endif
