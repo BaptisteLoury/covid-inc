@@ -19,3 +19,7 @@ TileType AbstractTile::getType() {
 const char * AbstractTile::getChar() {
     return _associatedChar;
 }
+
+void AbstractTile::setChar(const char * c) {
+    _associatedChar = c;
+}

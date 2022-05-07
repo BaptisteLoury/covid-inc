@@ -30,7 +30,7 @@ void Map::addTile(int x, int y, char c, std::vector<AbstractTile *>& v) {
         tileC[1] = '\0';
         v.push_back(new SpawnTile(x,y,tileC));
         // Ajout de la case dans les cases de spawn
-        _spawnTiles.push_back(dynamic_cast<LandTile *>(v.back()));
+        _spawnTiles.push_back(dynamic_cast<SpawnTile *>(v.back()));
     }
     else {
         v.push_back(new OceanTile(x,y));
@@ -39,4 +39,20 @@ void Map::addTile(int x, int y, char c, std::vector<AbstractTile *>& v) {
 
 std::vector<std::vector<AbstractTile *>> Map::getTiles() {
     return _tiles;
+}
+
+std::vector<SpawnTile *> Map::getSpawnTiles() {
+    return _spawnTiles;
+}
+
+void Map::pauseTimers() {
+    for(int i=0; i < _infestedTiles.size(); i++) {
+        _infestedTiles[i]->getInfectedTime().Stop();
+    }
+}
+
+void Map::resumeTimers() {
+    for(int i=0; i < _infestedTiles.size(); i++) {
+        _infestedTiles[i]->getInfectedTime().Start();
+    }
 }

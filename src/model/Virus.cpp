@@ -1,4 +1,4 @@
-#include "model/Virus.hpp"
+#include "model/Virus.hpp"  
 
 Virus::Virus() : _lowSeverity(VirusSeverity::LOW),
                 _mediumSeverity(VirusSeverity::MEDIUM),
@@ -18,15 +18,6 @@ std::chrono::_V2::steady_clock::duration Virus::getLastProke() {
 
 void Virus::setLastProke() {
     _lastProke = _livingTime.GetElapsed();
-}
-
-Virus::Virus(){
-
-    this->_level=1;
-    this->_lowSeverity= Severity(VirusSeverity::LOW);
-    this->_mediumSeverity= Severity(VirusSeverity::MEDIUM);
-    this->_highSeverity= Severity(VirusSeverity::HIGH);
-
 }
 
 short Virus::getLevel(){

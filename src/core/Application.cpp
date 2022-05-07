@@ -6,9 +6,10 @@ Application::Application() {
 
 void Application::run(){
     initscr();
-    WindowUtils::initConsts();
     start_color();
     use_default_colors();
+
+    WindowUtils::initConsts();
 
     controller = MainController::s_getSingleton();
     
@@ -18,7 +19,7 @@ void Application::run(){
 
     while(1) {
         controller->updateGame();
-        if(time.diffWithCurrent(lastLoop) > 100) {
+        if(time.diffWithCurrent(lastLoop) > 50) {
             lastLoop = time.GetElapsed();
             clear();
             controller->draw();

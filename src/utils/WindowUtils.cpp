@@ -33,4 +33,16 @@ void WindowUtils::initConsts() {
     STATS_WIDTH = COLS/2;
     STATS_HEIGHT = LINES - 47;
     STATS_POSX = COLS/2;
+
+    init_pair(11, COLOR_RED, -1); // paire 0 indéfinissable
+    init_pair(1, COLOR_BLACK, COLOR_BLUE);
+    init_pair(2, COLOR_BLACK, COLOR_GREEN);
+    init_pair(3, COLOR_BLACK, COLOR_CYAN);
+    init_pair(4, COLOR_BLACK, COLOR_MAGENTA);
+    init_pair(5, COLOR_BLACK, COLOR_YELLOW);
+    init_pair(6, COLOR_RED, COLOR_BLUE);
+    init_pair(7, COLOR_RED, COLOR_GREEN);
+    init_pair(8, COLOR_RED, COLOR_CYAN);
+    init_pair(9, COLOR_RED, COLOR_MAGENTA);
+    init_pair(10, COLOR_RED, COLOR_YELLOW);
 }

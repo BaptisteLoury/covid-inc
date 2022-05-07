@@ -16,16 +16,19 @@ private:
 
         // Permet d'éviter d'avoir à parcourir toutes les cases
         std::vector<LandTile *> _infestedTiles;
-        std::vector<LandTile *> _spawnTiles;
+        std::vector<SpawnTile *> _spawnTiles;
 public:
         Map();
         Map(std::vector<std::string> charMap);
         std::vector<std::vector<AbstractTile *>> getTiles();
         std::vector<LandTile *> getInfestedTiles();
-        std::vector<LandTile *> getSpawnTiles();
+        std::vector<SpawnTile *> getSpawnTiles();
         
         int getNbLandTiles();
         void addTile(int x, int y, char c, std::vector<AbstractTile *>& v);
+
+        void pauseTimers();
+        void resumeTimers();
 };
 
 #endif

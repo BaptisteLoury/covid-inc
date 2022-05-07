@@ -8,12 +8,10 @@
 class MapWindow : virtual public AbstractWindow {
 private:
         std::vector<std::vector<AbstractTile *>> _map;
-
-        void initColors();
 public:
         MapWindow();
         void draw();
-        void updateMap(std::vector<std::vector<AbstractTile *>> map);
+        void updateMap(std::vector<std::vector<AbstractTile *>> const & map);
         void drawTiles();
 };
 

@@ -1,5 +1,6 @@
 #include "model/LandTile.hpp"
 #include <algorithm>
+#include <iostream>
 
 LandTile::LandTile(int x, int y) : LandTile(TileType::LAND, ":", x, y) {}
 LandTile::LandTile(TileType t, const char * c,int x, int y)
@@ -53,11 +54,23 @@ VirusSeverity LandTile::getVirusSeverity() {
 
 void LandTile::draw(WINDOW * w,int x, int y) {
     if(isInfected()) {
-        attron(COLOR_PAIR(0));
+        wattron(w,COLOR_PAIR(11));
         AbstractTile::draw(w,x,y);
-        attroff(COLOR_PAIR(0));
+        wattroff(w,COLOR_PAIR(11));
     }
     else {
         AbstractTile::draw(w,x,y);
     }
+}
+
+void LandTile::infect() {
+    _virus = VirusSeverity::LOW;
+}
+
+void LandTile::cure() {
+    _virus = VirusSeverity::NONE;
+}
+
+std::chrono::_V2::steady_clock::duration LandTile::getInfectionTiming() {
+    return _infectionTiming;
 }

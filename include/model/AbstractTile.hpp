@@ -22,6 +22,7 @@ public:
     int getY();
     virtual void draw(WINDOW * w,int x, int y);
     const char * getChar();
+    void setChar(const char * c);
 };
 
 #endif

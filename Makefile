@@ -19,4 +19,4 @@ $(TARGET): $(OBJS)
 
 $(DIR_OBJ)/%.o: src/%.cpp $(INCS)
 	mkdir -p $(@D)
-	$(CC) -o $@ -c $< $(CFLAGS) $(INC_DIRS)  -I./include -L./lib -lncurses
+	$(CC) -o $@ -c $< $(CFLAGS)  -I./include -L./lib -lncurses

@@ -1,9 +1,12 @@
 #include "controller/MainController.hpp"
+#include "controller/VirusController.hpp"
 #include "view/MapWindow.hpp"
 #include "view/LegendWindow.hpp"
 #include "view/DialogWindow.hpp"
 #include "view/StatsWindow.hpp"
 #include "utils/MapUtils.hpp"
+#include "model/SpawnDialog.hpp"
+#include "model/SpawnTile.hpp"
 #include <iostream>
 
 MainController * MainController::s_singleton = nullptr;
@@ -24,6 +27,10 @@ MainController::MainController() {
     MapUtils tool;
     std::vector<std::string> stringMap = tool.getMapTable();
     _map = Map(stringMap);
+
+    std::vector<SpawnTile *> firstSpawn = _map.getSpawnTiles();
+
+    dynamic_cast<DialogWindow*>(_windows[2])->setDialog(new SpawnDialog(firstSpawn));
 }
 
 void MainController::draw() {
@@ -34,11 +41,23 @@ void MainController::draw() {
 
 void MainController::updateGame() {
 
+    VirusController::spreadVirus(_map);
+
     // MapWindow
     dynamic_cast<MapWindow*>(_windows[0])->updateMap(_map.getTiles());
 
 }
 
 void MainController::interactWithUser() {
-    dynamic_cast<DialogWindow*>(_windows[2])->launchDialog();
+    _virus.getLivingTime().Stop();
+    _map.pauseTimers();
+
+    while(!dynamic_cast<DialogWindow*>(_windows[2])->launchDialog()) {
+        wclear(_windows[2]->getWindow());
+        _windows[2]->draw();
+    }
+    dynamic_cast<DialogWindow*>(_windows[2])->deleteDialog();
+
+    _map.resumeTimers();
+    _virus.getLivingTime().Start();
 }
