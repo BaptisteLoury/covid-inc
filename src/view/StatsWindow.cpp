@@ -4,7 +4,7 @@
 #include <iostream>
 #include "model/Map.hpp"
 
-StatsWindow::StatsWindow(Virus& virus, Map& map) 
+StatsWindow::StatsWindow(Virus * virus, Map * map) 
     : AbstractWindow(WindowType::STATS), _virus(virus), _map(map) {
         _win = subwin(stdscr, WindowUtils::STATS_HEIGHT, WindowUtils::STATS_WIDTH, WindowUtils::STATS_POSY, WindowUtils::STATS_POSX);
     
@@ -16,7 +16,7 @@ void StatsWindow::draw() {
             mvwprintw(_win, 1, 50, "VISUALISATION");
         wattroff(_win,A_UNDERLINE);
         
-        mvwprintw(_win, 5, 1, " Total de cases infectées %s", _map.getInfestedTiles().size());
+        mvwprintw(_win, 5, 1, " Total de cases infectées %d", _map->countInfested());
 
         box(_win, ACS_VLINE, ACS_HLINE);
    
@@ -28,7 +28,7 @@ void StatsWindow::draw() {
 }
 
 std::string StatsWindow::timeDecorator() {
-    int time = _virus.getLivingTime().time();
+    int time = _virus->getLivingTime().time();
     int minutes = time / 60000;
     int secondes = (time % 60000) / 1000;
     std::string s_decorator = minutes > 9 ? "" : "0";

@@ -1,10 +1,12 @@
 #include "model/LandTile.hpp"
+#include "model/Map.hpp"
 #include <algorithm>
 #include <iostream>
+#include <fstream>
 
 LandTile::LandTile(int x, int y) : LandTile(TileType::LAND, ":", x, y) {}
 LandTile::LandTile(TileType t, const char * c,int x, int y)
-    : AbstractTile(t, c, x, y), _virus(VirusSeverity::NONE) {}
+    : AbstractTile(t, c, x, y), _virus(VirusSeverity::NONE), _infectionTimeLeft(0) {}
 
 LandTile::LandTile() {}
 
@@ -17,22 +19,15 @@ std::vector<LandTile *> LandTile::getNeighbours(std::vector<std::vector<Abstract
     return neighbours;
 }
 
-std::vector<LandTile *> LandTile::getInfectedNeighbours(std::vector<std::vector<AbstractTile *>> &carte) {
-    std::vector<LandTile *> infected = getNeighbours(carte);
-    for(int i=0; i < infected.size(); i++) {
-        if(!infected[i]->isInfected())
-            infected.erase(infected.begin() + i);
-    }
-    return infected;
-}
 
-std::vector<LandTile *> LandTile::getNotInfectedNeighbours(std::vector<std::vector<AbstractTile *>> &carte) {
-    std::vector<LandTile *> infected = getNeighbours(carte);
-    for(int i=0; i < infected.size(); i++) {
-        if(infected[i]->isInfected())
-            infected.erase(infected.begin() + i);
+std::vector<LandTile *> erase(std::vector<LandTile *>& t,LandTile * l) {
+    std::vector<LandTile *> toReturn;
+    for(int i=0; i < t.size(); i++) {
+        if(t[i] != l) {
+            toReturn.push_back(t[i]);
+        }
     }
-    return infected;
+    return toReturn;
 }
 
 void LandTile::addNeighbIfLandTile(AbstractTile * t, std::vector<LandTile *>& n) {
@@ -70,4 +65,34 @@ void LandTile::infect() {
 
 void LandTile::cure() {
     _virus = VirusSeverity::NONE;
+}
+
+void LandTile::tick() {
+    _infectionTimeLeft--;
+}
+
+void LandTile::spreadVirus(Map& map) {
+
+    std::vector<std::vector<AbstractTile *>> carte = map.getTiles();
+
+    if(isInfected()) {
+
+        std::vector<LandTile *> neighbours = getNeighbours(carte);
+
+                    std::ofstream file;
+    file.open("log.err", std::ios::app);
+    file<< "pre:" << _posX << ":" << _posY << ":" << map.getInfestedTiles().size() << "\n";
+        
+
+        for(int i=0; i < neighbours.size(); i++) {
+            if(!neighbours[i]->isInfected()) {
+                neighbours[i]->infect();
+                map.addInfested(neighbours[i]);
+        file<< "during:" << neighbours[i]->getX() << ":" << neighbours[i]->getY() << "\n";
+            }
+        }
+    file<< "post:" << _posX << ":" << _posY << ":" << map.getInfestedTiles().size() << "\n";
+    file<< "count:"  << map.countInfested() << "\n\n";
+    file.close();
+    }
 }

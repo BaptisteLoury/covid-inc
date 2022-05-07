@@ -28,14 +28,6 @@ std::vector<LandTile *> CityTile::getNeighbours(std::vector<std::vector<Abstract
     return LandTile::getNeighbours(carte);
 }
 
-std::vector<LandTile *> CityTile::getInfectedNeighbours(std::vector<std::vector<AbstractTile *>> &carte) {
-    return LandTile::getInfectedNeighbours(carte);
-}
-
-std::vector<LandTile *> CityTile::getNotInfectedNeighbours(std::vector<std::vector<AbstractTile *>> &carte) {
-    return LandTile::getNotInfectedNeighbours(carte);
-}
-
 void CityTile::draw(WINDOW * w,int x, int y) {
     wattron(w,A_BOLD | A_UNDERLINE);
     // LandTile::draw(w,x,y);

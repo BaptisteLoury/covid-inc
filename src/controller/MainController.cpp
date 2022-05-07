@@ -28,7 +28,7 @@ MainController::MainController() {
     std::vector<std::string> stringMap = tool.getMapTable();
     _map = Map(stringMap);
 
-    _windows.push_back(new StatsWindow(_virus, _map));
+    _windows.push_back(new StatsWindow(&_virus, &_map));
     std::vector<SpawnTile *> firstSpawn = _map.getSpawnTiles();
 
     dynamic_cast<DialogWindow*>(_windows[2])->setDialog(new SpawnDialog(firstSpawn));
@@ -46,6 +46,8 @@ void MainController::updateGame() {
 
     // MapWindow
     dynamic_cast<MapWindow*>(_windows[0])->updateMap(_map.getTiles());
+        
+
 
 }
 

@@ -15,7 +15,7 @@ void LegendWindow::draw() {
         wattroff(_win,A_UNDERLINE);
     
     
-        mvwprintw(_win,0,20," \(vide\)-> l'eau");
+        mvwprintw(_win,0,20," (vide)-> l'eau");
 
         mvwprintw(_win,0,40," : -> la terre");
     
