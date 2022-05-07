@@ -3,7 +3,7 @@
 Virus::Virus() : _lowSeverity(VirusSeverity::LOW),
                 _mediumSeverity(VirusSeverity::MEDIUM),
                 _highSeverity(VirusSeverity::HIGH),
-                _level(1) {
+                _level(1), _exp(0), _expCap(1000) {
     _livingTime.Start();
     _lastProke = _livingTime.GetElapsed();
 }
@@ -31,14 +31,43 @@ void Virus::setLevel(short newLevel){
 
 }
 
-Severity Virus::getLowSeverity(){
-    return _lowSeverity;
+Severity * Virus::getSeverity(VirusSeverity vs) {
+    switch (vs)
+    {
+    case VirusSeverity::LOW:
+        return &_lowSeverity;
+        break;
+    case VirusSeverity::MEDIUM:
+        return &_mediumSeverity;
+        break;
+    case VirusSeverity::HIGH:
+        return &_highSeverity;
+        break;
+    default:
+        return &_lowSeverity;
+        break;
+    }
 }
 
-Severity Virus:: getMediumSeverity(){
-    return _mediumSeverity;
+int Virus::getExp() {
+    return _exp;
 }
 
-Severity Virus::getHighSeverity(){
-    return _highSeverity;
+bool Virus::addExp(int exp) {
+    if(_level < 10) {
+        _exp += exp;
+
+        if(_exp > _expCap) {
+            _exp = 0;
+            _level++;
+            _expCap *= 2;
+            return true;
+        }
+
+    }
+    return false;
+}
+
+int Virus::getExpCap() {
+    return _expCap;
 }

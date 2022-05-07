@@ -2,11 +2,14 @@
 #include "utils/TileUtils.hpp"
 #include <iostream>
 #include "model/Severity.hpp"
+#include <fstream>
 
 std::vector<std::vector<LandTile *>> CityTile::ASSO = {};
 
 CityTile::CityTile(int x, int y, const char * c) :  AbstractTile(TileType::CITY, c, x, y) {
     _virus = VirusSeverity::NONE;
+    _infectionTimeLeft = 0;
+    _imunityTime = 0;
     bool found = false;
     int i = 0;
     while(!found && i < TileUtils::CITY_ASSO.size()) {
@@ -35,6 +38,12 @@ std::vector<LandTile *> CityTile::getNeighbours(std::vector<std::vector<Abstract
     std::vector<LandTile *> relatedCities = LandTile::getNeighbours(carte);
     std::vector<LandTile *> a = getCityAsso();
     relatedCities.insert(relatedCities.end(), a.begin(), a.end());
+
+    std::ofstream file;
+    file.open("log.err", std::ios::app);
+    file << relatedCities.size() << std::endl;
+    file.close();
+
     return relatedCities;
 }
 

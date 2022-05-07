@@ -21,6 +21,7 @@ public:
         void draw();
         void updateGame();
         void interactWithUser();
+        void postGameEvent();
 };
 
 #endif

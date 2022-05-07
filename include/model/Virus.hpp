@@ -10,6 +10,8 @@
 class Virus {
 private:
         short _level; // niveau du virus qui le rend plus redoutable au fil des niveaux et se propage plus vite
+        int _exp;
+        int _expCap;
         // std::vector<AbstractBonus &> _bonus; // potentielles améliorations pour accélérer la propagation le virus 
         Severity _lowSeverity; // le virus se déplace lentement
         Severity _mediumSeverity; // le virus se déplace rapidement
@@ -43,25 +45,33 @@ public:
         void setLevel(short newLevel);
 
         /**
-         * @brief Get the Low Severity object
+         * @brief Get the Severity object
          * 
+         * @param vs 
          * @return Severity 
          */
-        Severity getLowSeverity();
+        Severity * getSeverity(VirusSeverity vs);
 
         /**
-         * @brief Get the Medium Severity object
+         * @brief Get the Exp object
          * 
-         * @return Severity 
+         * @return int 
          */
-        Severity getMediumSeverity();
+        int getExp();
 
         /**
-         * @brief Get the High Severity object
+         * @brief Add exp to current
          * 
-         * @return Severity 
+         * @param exp 
          */
-        Severity getHighSeverity();
+        bool addExp(int exp);
+
+        /**
+         * @brief Get the Exp Cap object
+         * 
+         * @return int 
+         */
+        int getExpCap();
 };
 
 #endif

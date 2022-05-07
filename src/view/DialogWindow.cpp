@@ -21,7 +21,7 @@ bool DialogWindow::launchDialog() {
 
     int i;
     for(i=0; i < _dialog->getAnswers().size(); i++) {
-        mvwprintw(_win,4+i,2,"%d: %s",i,DialogUtils::getAssociatedText(_dialog->getAnswers()[i]));
+        mvwprintw(_win,4+i,2,"%d: %s",i,DialogUtils::getAssociatedText(_dialog->getAnswers()[i]).c_str());
     }
     std::string s{20, '\0'};
     mvwscanw(_win,5+i,2,"%s", s.c_str());

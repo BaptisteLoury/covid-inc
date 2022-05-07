@@ -12,6 +12,7 @@ Map::Map(std::vector<std::string> charMap) {
         }
         _tiles.push_back(tLine);
     }
+    _hasGameBegun = false;
 }
 
 void Map::addTile(int x, int y, char c, std::vector<AbstractTile *>& v) {
@@ -50,6 +51,7 @@ std::vector<LandTile *> Map::getInfestedTiles() {
 }
 
 void Map::addInfested(LandTile * tile) {
+    _hasGameBegun = true;
     _infestedTiles.push_back(tile);
 }
 
@@ -86,8 +88,24 @@ void Map::removeInfested(LandTile * tile) {
 }    
 
 float Map::percentageInfested(){
-   int nbIndestedTiles= countInfested();
-   int nbTotalTiles= _tiles.size();
-   float percentage = ((float)nbIndestedTiles/(float)nbTotalTiles);
+    int nbIndestedTiles= countInfested();
+    int nbTotalTiles= countLand();
+    float percentage = ((float)nbIndestedTiles/(float)nbTotalTiles)*100;
     return percentage;
+}
+
+int Map::countLand() {
+    int count = 0;
+    for(int i=0; i < _tiles.size(); i++) {
+        for(int y=0; y < _tiles[i].size(); y++) {
+            if(TileType::OCEAN != _tiles[i][y]->getType()) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+bool Map::hasGameBegun() {
+    return _hasGameBegun;
 }

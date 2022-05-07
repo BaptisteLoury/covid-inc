@@ -1,12 +1,10 @@
 #include "model/SpawnDialog.hpp"
 #include "utils/DialogUtils.hpp"
-#include <iostream>
-
 
 SpawnDialog::SpawnDialog() : AbstractDialog() {}
 
-SpawnDialog::SpawnDialog(std::vector<SpawnTile *>& spawns) :
-    AbstractDialog(DialogType::SPAWN, 0), _spawns(spawns) {
+SpawnDialog::SpawnDialog(std::vector<SpawnTile *>& spawns, Virus * virus) :
+    AbstractDialog(DialogType::SPAWN, 0,virus), _spawns(spawns) {
         _question = DialogUtils::getAssociatedText(DialogType::SPAWN);
     }
 
@@ -33,7 +31,7 @@ void SpawnDialog::applyChoice() {
     while(i < _spawns.size() && !found) {
         if(choice == std::stoi(_spawns[i]->getChar())) {
             found = true;
-            _spawns[i]->infect();
+            _spawns[i]->infect(*_virus);
         }
         i++;
     }

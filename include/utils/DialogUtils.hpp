@@ -15,6 +15,8 @@ class DialogUtils {
         static const std::string ANSWER_PASS;
         static const std::string ANSWER_SPAWN;
         static const std::string ANSWER_UP_VIRUS_SPREAD_CHANCE;
+        static const std::string ANSWER_UP_VIRUS_LIVING_TIME;
+        static const std::string ANSWER_REDUCE_IMUNE_CHANCE;
 
         static std::string getAssociatedText(DialogType dt);
         static std::string getAssociatedText(DialogAnswers da);

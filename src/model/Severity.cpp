@@ -2,51 +2,56 @@
 
 
 Severity::Severity(){
-            this->_spreadChance=100.0;
-            this->_lifetime=100.0;
-            // this->_evolveChance=50.0;
-            this->_scorePerSec=1;
-            this->_severityType=VirusSeverity::LOW;
+            _spreadChance=30;
+            _lifetime=10;
+            _immuneChance=50.0;
+            // _evolveChance=50.0;
+            _scorePerSec=1;
+            _severityType=VirusSeverity::LOW;
 }
 
 Severity::Severity(VirusSeverity severityType){
     switch (severityType)
       {
          case VirusSeverity::LOW:
-            this->_spreadChance=100.0;
-            this->_lifetime=100.0;
-            // this->_evolveChance=50.0;
-            this->_scorePerSec=1;
-            this->_severityType=VirusSeverity::LOW;
+            _spreadChance=50.0;
+            _lifetime=10.0;
+            _immuneChance=50.0;
+            // _evolveChance=50.0;
+            _scorePerSec=1;
+            _severityType=VirusSeverity::LOW;
             
             break;
 
         case VirusSeverity::MEDIUM:
-             this->_spreadChance=100.0;
-            this->_lifetime=100.0;
-            // this->_evolveChance=50.0;
-            this->_scorePerSec=1;
-            this->_severityType=VirusSeverity::MEDIUM;
+             _spreadChance=100.0;
+            _lifetime=100.0;
+            _immuneChance=50.0;
+            // _evolveChance=50.0;
+            _scorePerSec=1;
+            _severityType=VirusSeverity::MEDIUM;
             
             break;
 
         case VirusSeverity::HIGH:
 
-            this->_spreadChance=100.0;
-            this->_lifetime=100.0;
-            // this->_evolveChance=50.0;
-            this->_scorePerSec=1;
-            this->_severityType=VirusSeverity::HIGH;
+            _spreadChance=100.0;
+            _lifetime=100.0;
+            _immuneChance=50.0;
+            // _evolveChance=50.0;
+            _scorePerSec=1;
+            _severityType=VirusSeverity::HIGH;
             
             break;
 
          default:
 
-            this->_spreadChance=100.0;
-            this->_lifetime=100.0;
-            // this->_evolveChance=50.0;
-            this->_scorePerSec=1;
-            this->_severityType=VirusSeverity::LOW;
+            _spreadChance=100.0;
+            _lifetime=100.0;
+            _immuneChance=50.0;
+            // _evolveChance=50.0;
+            _scorePerSec=1;
+            _severityType=VirusSeverity::LOW;
             
             break;
       }
@@ -87,4 +92,18 @@ int Severity::getScorePerSec(){
 
 void Severity::setScorePerSec(int newScorePerSec){
     _scorePerSec=newScorePerSec;
+}
+
+float Severity::getImmuneChance() {
+    return _immuneChance;
+}
+
+void Severity::upLifetime(float up) {
+    _lifetime += up;
+}
+void Severity::upSpreadChance(float up) {
+    _spreadChance += up;
+}
+void Severity::upImmunityChance(float up) {
+    _immuneChance -= up;
 }

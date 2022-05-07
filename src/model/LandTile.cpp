@@ -5,7 +5,7 @@
 
 LandTile::LandTile(int x, int y) : LandTile(TileType::LAND, ":", x, y) {}
 LandTile::LandTile(TileType t, const char * c,int x, int y)
-    : AbstractTile(t, c, x, y), _virus(VirusSeverity::NONE), _infectionTimeLeft(0) {}
+    : AbstractTile(t, c, x, y), _virus(VirusSeverity::NONE), _infectionTimeLeft(0), _imunityTime(0) {}
 
 LandTile::LandTile() {}
 
@@ -61,20 +61,29 @@ void LandTile::draw(WINDOW * w,int x, int y) {
     }
 }
 
-void LandTile::infect() {
+void LandTile::infect(Virus& virus) {
     _virus = VirusSeverity::LOW;
-    _infectionTimeLeft = 10;
+    _infectionTimeLeft = virus.getSeverity(_virus)->getLifetime();
 }
 
-void LandTile::cure() {
+void LandTile::cure(Virus& virus) {
     _virus = VirusSeverity::NONE;
+    int spread = std::rand() % 101 + 1;
+    if(spread > 100 - virus.getSeverity(VirusSeverity::LOW)->getImmuneChance()) {
+        _imunityTime = 3;
+    }
 }
 
 void LandTile::tick() {
-    _infectionTimeLeft--;
+    if(_infectionTimeLeft > 0) {
+        _infectionTimeLeft--;
+    }
+    if(_imunityTime > 0) {
+        _imunityTime--;
+    }
 }
 
-void LandTile::spreadVirus(Map& map) {
+void LandTile::spreadVirus(Map& map,Virus& virus) {
 
     std::vector<std::vector<AbstractTile *>> carte = map.getTiles();
 
@@ -84,8 +93,10 @@ void LandTile::spreadVirus(Map& map) {
         
 
         for(int i=0; i < neighbours.size(); i++) {
-            if(!neighbours[i]->isInfected()) {
-                neighbours[i]->infect();
+            int spread = std::rand() % 101 + 1;
+            if(!neighbours[i]->isInfected() && neighbours[i]->_imunityTime <= 0
+                && spread > 100 - virus.getSeverity(_virus)->getSpreadChance()) {
+                neighbours[i]->infect(virus);
                 map.addInfested(neighbours[i]);
             }
         }

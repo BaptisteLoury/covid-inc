@@ -6,6 +6,8 @@ le virus. Ensuite, celui ci va se propager sur l’ensemble des cellules qui lui
 trajets d’avion vers d’autres villes, il est possible, une fois que le virus a atteint une ville,qu’il se propage vers de nouveaux horizons. 
 Ainsi, il peut facilement franchir les grandes étendues d’eau pour conquérir le monde.
 
+La partie est gagnée quand le virus a contaminé 90% des terres émergées.
+
 
 
 Conditions de lancement du jeu :

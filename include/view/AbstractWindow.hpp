@@ -2,6 +2,7 @@
 #define ABSTRACTWINDOW_H
 
 #include <ncurses.h>
+#include "model/Map.hpp"
 
 enum class WindowType {MAP, LEGEND, DIALOG, STATS};
 
@@ -13,6 +14,8 @@ public :
         AbstractWindow(WindowType type);
         WINDOW * getWindow();
         virtual void draw() = 0;
+
+        static void endGame(Map& map);
 };
 
 #endif

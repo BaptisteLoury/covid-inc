@@ -10,7 +10,7 @@
 
 class Map {
 private:
-        int _nbLandTiles;
+        bool _hasGameBegun;
         // Toutes les cases
         std::vector<std::vector<AbstractTile *>> _tiles;
 
@@ -30,7 +30,9 @@ public:
         
         void removeInfested(LandTile * tile);
         int countInfested();
+        int countLand();
         float percentageInfested();
+        bool hasGameBegun();
 };
 
 #endif

@@ -1,28 +1,15 @@
 #include <ncurses.h>
 #include <iostream>
-#include "../include/utils/Timer.hpp"
+#include "../include/model/Virus.hpp"
+
+using namespace std;
 
 int main() {
-    initscr();
-    start_color();
-    use_default_colors();
+    Virus a;
 
-    Timer timer;
-    timer.Start();
-    std::chrono::_V2::steady_clock::duration lastLoop = timer.GetElapsed();
+    cout << a.getSeverity(VirusSeverity::LOW)->getLifetime() << endl;
 
-    int i = 0;
+    a.getSeverity(VirusSeverity::LOW)->upLifetime(5.0f);
 
-    while(1) {
-        if(timer.diffWithCurrent(lastLoop) > 100) {
-            lastLoop = timer.GetElapsed();
-            clear();
-            box(stdscr, ACS_VLINE, ACS_HLINE);
-        mvprintw(2,2,"%d",i);
-            refresh();
-        i++;
-        }
-    }
-
-    endwin();
+    cout << a.getSeverity(VirusSeverity::LOW)->getLifetime() << endl;
 }  

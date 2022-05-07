@@ -5,6 +5,7 @@
 #include "AbstractTile.hpp"
 #include "Severity.hpp"
 #include "utils/Timer.hpp"
+#include "model/Virus.hpp"
 
 class Map;
 
@@ -19,6 +20,12 @@ protected:
          * @brief Temps d'infection restant
          */
         int _infectionTimeLeft;
+
+        /**
+         * @brief temps d'imunité post infection
+         * 
+         */
+        int _imunityTime;
 
         /**
          * @brief Ajoute une case t à un tableau n si elle est du bon type
@@ -88,13 +95,13 @@ public:
          * @brief Initialise le timer et change le VirusSeverity à LOW
          * 
          */
-        void infect();
+        void infect(Virus& virus);
 
         /**
          * @brief stop le timer
          * 
          */
-        void cure();
+        void cure(Virus& virus);
 
         /**
          * @brief Get the Infection Time Left object
@@ -116,7 +123,7 @@ public:
          * 
          * @param carte 
          */
-        void spreadVirus(Map& map);
+        void spreadVirus(Map& map,Virus& virus);
 };
 
 #endif

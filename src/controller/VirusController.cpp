@@ -1,15 +1,19 @@
 #include "controller/VirusController.hpp"
 #include "model/Map.hpp"
+#include "model/LevelUpDialog.hpp"
 #include <algorithm>
-#include <iostream>
-#include <fstream>
 
-void VirusController::spreadVirus(Map& map,Virus& virus) {
+void VirusController::spreadVirus(Map& map,Virus * virus,DialogWindow * w) {
 
-    if(virus.getLivingTime().diffWithCurrent(virus.getLastProke()) >= 1000) {
+    if(virus->getLivingTime().diffWithCurrent(virus->getLastProke()) >= 1000) {
 
-        virus.setLastProke();
-        tickVirus(map);
+
+        if(virus->addExp(map.countInfested())) {
+            w->setDialog(new LevelUpDialog(virus));
+        }
+
+        virus->setLastProke();
+        tickVirus(map,*virus);
         checkSpawns(map);
     }
 }
@@ -30,22 +34,29 @@ void VirusController::checkSpawns(Map& map) {
 }
 
 
-void VirusController::tickVirus(Map& map) {
+void VirusController::tickVirus(Map& map,Virus& virus) {
 
     std::vector<LandTile *> infected = map.getInfestedTiles();
+    std::vector<std::vector<AbstractTile *>> tiles = map.getTiles();
+
+    for(int i=0; i < tiles.size();i++) {
+        for(int y=0; y < tiles[i].size(); y++) {
+            if(tiles[i][y]->getType() != TileType::OCEAN) {
+                dynamic_cast<LandTile *>(tiles[i][y])->tick();
+            }
+        }
+    }
 
     for(int i=0; i < infected.size(); i++) {
 
-        infected[i]->tick();
-
         if(infected[i]->getInfectionTimeLeft() < 1) {
-            infected[i]->cure();
+            infected[i]->cure(virus);
             map.removeInfested(infected[i]);
         }
         else {
 
             std::vector<std::vector<AbstractTile *>> carte = map.getTiles();
-            infected[i]->spreadVirus(map);
+            infected[i]->spreadVirus(map,virus);
         }
     }
 }

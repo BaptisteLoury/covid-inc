@@ -14,6 +14,7 @@ protected:
         float _spreadChance;
         float _lifetime;
         float _evolveChance;
+        float _immuneChance;
         int _scorePerSec;
         VirusSeverity _severityType;
 public:
@@ -129,6 +130,11 @@ public:
         */
         void setSeverityType(VirusSeverity typeSeverity);
 
+        float getImmuneChance();
+
+        void upLifetime(float up);
+        void upSpreadChance(float up);
+        void upImmunityChance(float up);
 };
 
 #endif

@@ -1,7 +1,6 @@
 #include <ncurses.h>
 #include "view/StatsWindow.hpp"
 #include "utils/WindowUtils.hpp"
-#include <iostream>
 #include "model/Map.hpp"
 
 StatsWindow::StatsWindow(Virus * virus, Map * map) 
@@ -18,11 +17,22 @@ void StatsWindow::draw() {
         
         mvwprintw(_win, 3, 1, " Total de cases infectées %d", _map->countInfested());
 
-        mvwprintw(_win, 5, 1, " Taux de cases infectées %f  \%", _map->percentageInfested());
+        mvwprintw(_win, 5, 1, " Taux de cases infectées %.2f%c", _map->percentageInfested(),'%');
 
         box(_win, ACS_VLINE, ACS_HLINE);
    
-        mvwprintw(_win, 10, 1, " %s", timeDecorator().c_str());
+        mvwprintw(_win, 10, 1, "Temps passé : %s", timeDecorator().c_str());
+
+        mvwprintw(_win, 11, 1, "Level %hd", _virus->getLevel());
+        if(_virus->getLevel() < 10)
+            mvwprintw(_win, 11, 15, "Exp : %d/%d", _virus->getExp(),_virus->getExpCap());
+        else
+            mvwprintw(_win, 11, 15, "MAX");
+
+        mvwprintw(_win, 13, 1, "Chance de propagation : %.2f%c", _virus->getSeverity(VirusSeverity::LOW)->getSpreadChance(),'%');
+        mvwprintw(_win, 14, 1, "Durée de vie : %.2fs", _virus->getSeverity(VirusSeverity::LOW)->getLifetime());
+        mvwprintw(_win, 15, 1, "Risque d'immunité : %.2f%c", _virus->getSeverity(VirusSeverity::LOW)->getImmuneChance(),'%');
+
     wattroff(_win,A_BOLD);
 
 

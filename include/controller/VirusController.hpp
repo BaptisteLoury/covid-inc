@@ -3,13 +3,14 @@
 
 #include "model/Map.hpp"
 #include "model/Virus.hpp"
+#include "view/DialogWindow.hpp"
 
 class VirusController {
 private:
     static void checkSpawns(Map& map);
-    static void tickVirus(Map& map);
+    static void tickVirus(Map& map,Virus& virus);
 public:
-    static void spreadVirus(Map& map,Virus& virus);
+    static void spreadVirus(Map& map,Virus * virus,DialogWindow* w);
 };
 
 #endif

@@ -6,7 +6,9 @@
 #include "view/StatsWindow.hpp"
 #include "utils/MapUtils.hpp"
 #include "model/SpawnDialog.hpp"
+#include "model/LevelUpDialog.hpp"
 #include "model/SpawnTile.hpp"
+#include <time.h>
 #include <iostream>
 
 MainController * MainController::s_singleton = nullptr;
@@ -31,7 +33,9 @@ MainController::MainController() {
     _windows.push_back(new StatsWindow(&_virus, &_map));
     std::vector<SpawnTile *> firstSpawn = _map.getSpawnTiles();
 
-    dynamic_cast<DialogWindow*>(_windows[2])->setDialog(new SpawnDialog(firstSpawn));
+    dynamic_cast<DialogWindow*>(_windows[2])->setDialog(new SpawnDialog(firstSpawn,&_virus));
+
+    std::srand(time(NULL));
 }
 
 void MainController::draw() {
@@ -42,7 +46,7 @@ void MainController::draw() {
 
 void MainController::updateGame() {
 
-    VirusController::spreadVirus(_map,_virus);
+    VirusController::spreadVirus(_map,&_virus,dynamic_cast<DialogWindow*>(_windows[2]));
 
     // MapWindow
     dynamic_cast<MapWindow*>(_windows[0])->updateMap(_map.getTiles());
@@ -65,5 +69,15 @@ void MainController::interactWithUser() {
 
 
 bool MainController::isGameFinished(){
-    return (!(_map.percentageInfested()>90.0));
+    return (_map.percentageInfested()>90.0)
+        || (_map.hasGameBegun() && _map.countInfested() == 0);
+}
+
+void MainController::postGameEvent() {
+    clear();
+
+    AbstractWindow::endGame(_map);
+
+    refresh();
+    getch();
 }
