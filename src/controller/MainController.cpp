@@ -62,3 +62,8 @@ void MainController::interactWithUser() {
 
     _virus.getLivingTime().Start();
 }
+
+
+bool MainController::isGameFinished(){
+    return (!(_map.percentageInfested()>90.0));
+}

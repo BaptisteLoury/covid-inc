@@ -17,7 +17,7 @@ void Application::run(){
     time.Start();
     std::chrono::_V2::steady_clock::duration lastLoop = time.GetElapsed();
 
-    while(1) {
+    while(controller->isGameFinished()) {
         controller->updateGame();
         if(time.diffWithCurrent(lastLoop) > 50) {
             lastLoop = time.GetElapsed();

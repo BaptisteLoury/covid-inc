@@ -83,4 +83,11 @@ void Map::removeInfested(LandTile * tile) {
         i++;
     }
     _infestedTiles.pop_back();
+}    
+
+float Map::percentageInfested(){
+   int nbIndestedTiles= countInfested();
+   int nbTotalTiles= _tiles.size();
+   float percentage = ((float)nbIndestedTiles/(float)nbTotalTiles);
+    return percentage;
 }
