@@ -6,6 +6,8 @@
 #include "Severity.hpp"
 #include "utils/Timer.hpp"
 
+class Map;
+
 class LandTile : virtual public AbstractTile {
 protected:
         /**
@@ -74,22 +76,6 @@ public:
         virtual std::vector<LandTile *> getNeighbours(std::vector<std::vector<AbstractTile *>> &carte);
 
         /**
-         * @brief Get the Infected Neighbours
-         * 
-         * @param carte 
-         * @return std::vector<LandTile *> 
-         */
-        virtual std::vector<LandTile *> getInfectedNeighbours(std::vector<std::vector<AbstractTile *>> &carte);
-
-        /**
-         * @brief Get the Not Infected Neighbours
-         * 
-         * @param carte 
-         * @return std::vector<LandTile *> 
-         */
-        virtual std::vector<LandTile *> getNotInfectedNeighbours(std::vector<std::vector<AbstractTile *>> &carte);
-
-        /**
          * @brief Dessine la case dans la fenêtre à la position x;y
          * 
          * @param w fenêtre
@@ -110,11 +96,27 @@ public:
          */
         void cure();
 
-        
+        /**
+         * @brief Get the Infection Time Left object
+         * 
+         * @return int 
+         */
         int getInfectionTimeLeft() {
                 return _infectionTimeLeft;
         }
         
+        /**
+         * @brief reduce infection time left
+         * 
+         */
+        void tick();
+
+        /**
+         * @brief propage le virus aux voisins
+         * 
+         * @param carte 
+         */
+        void spreadVirus(Map& map);
 };
 
 #endif

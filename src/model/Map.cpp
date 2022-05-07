@@ -44,3 +44,25 @@ std::vector<std::vector<AbstractTile *>> Map::getTiles() {
 std::vector<SpawnTile *> Map::getSpawnTiles() {
     return _spawnTiles;
 }
+
+std::vector<LandTile *> Map::getInfestedTiles() {
+    return _infestedTiles;
+}
+
+void Map::addInfested(LandTile * tile) {
+    _infestedTiles.push_back(tile);
+}
+
+int Map::countInfested() {
+    int count = 0;
+    for(int i=0; i < _tiles.size(); i++) {
+        for(int y=0; y < _tiles[i].size(); y++) {
+            if(_tiles[i][y]->getType() != TileType::OCEAN) {
+                if(dynamic_cast<LandTile *>(_tiles[i][y])->isInfected()) {
+                    count++;
+                }
+            }
+        }
+    }
+    return count;
+}

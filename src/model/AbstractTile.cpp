@@ -23,3 +23,11 @@ const char * AbstractTile::getChar() {
 void AbstractTile::setChar(const char * c) {
     _associatedChar = c;
 }
+
+int AbstractTile::getX() {
+    return _posX;
+}
+
+int AbstractTile::getY() {
+    return _posY;
+}
