@@ -22,12 +22,13 @@ MainController::MainController() {
     _windows.push_back(new MapWindow);
     _windows.push_back(new LegendWindow);
     _windows.push_back(new DialogWindow);
-    _windows.push_back(new StatsWindow(_virus));
+   
 
     MapUtils tool;
     std::vector<std::string> stringMap = tool.getMapTable();
     _map = Map(stringMap);
 
+    _windows.push_back(new StatsWindow(_virus, _map));
     std::vector<SpawnTile *> firstSpawn = _map.getSpawnTiles();
 
     dynamic_cast<DialogWindow*>(_windows[2])->setDialog(new SpawnDialog(firstSpawn));
