@@ -26,9 +26,6 @@ public:
         
         int getNbLandTiles();
         void addTile(int x, int y, char c, std::vector<AbstractTile *>& v);
-
-        void pauseTimers();
-        void resumeTimers();
 };
 
 #endif

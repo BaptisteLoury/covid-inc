@@ -41,7 +41,7 @@ void MainController::draw() {
 
 void MainController::updateGame() {
 
-    VirusController::spreadVirus(_map);
+    VirusController::spreadVirus(_map,_virus);
 
     // MapWindow
     dynamic_cast<MapWindow*>(_windows[0])->updateMap(_map.getTiles());
@@ -50,7 +50,6 @@ void MainController::updateGame() {
 
 void MainController::interactWithUser() {
     _virus.getLivingTime().Stop();
-    _map.pauseTimers();
 
     while(!dynamic_cast<DialogWindow*>(_windows[2])->launchDialog()) {
         wclear(_windows[2]->getWindow());
@@ -58,6 +57,5 @@ void MainController::interactWithUser() {
     }
     dynamic_cast<DialogWindow*>(_windows[2])->deleteDialog();
 
-    _map.resumeTimers();
     _virus.getLivingTime().Start();
 }

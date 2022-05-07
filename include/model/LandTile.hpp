@@ -14,9 +14,9 @@ protected:
          */
         VirusSeverity _virus;
         /**
-         * @brief Temps à partir du quel la case a été infectée
+         * @brief Temps d'infection restant
          */
-        std::chrono::_V2::steady_clock::duration _infectionTiming;
+        int _infectionTimeLeft;
 
         /**
          * @brief Ajoute une case t à un tableau n si elle est du bon type
@@ -110,12 +110,11 @@ public:
          */
         void cure();
 
-        /**
-         * @brief Get the Infected Time object
-         * 
-         * @return Timer 
-         */
-        std::chrono::_V2::steady_clock::duration getInfectionTiming();
+        
+        int getInfectionTimeLeft() {
+                return _infectionTimeLeft;
+        }
+        
 };
 
 #endif

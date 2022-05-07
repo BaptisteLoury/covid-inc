@@ -65,12 +65,9 @@ void LandTile::draw(WINDOW * w,int x, int y) {
 
 void LandTile::infect() {
     _virus = VirusSeverity::LOW;
+    _infectionTimeLeft = 10;
 }
 
 void LandTile::cure() {
     _virus = VirusSeverity::NONE;
-}
-
-std::chrono::_V2::steady_clock::duration LandTile::getInfectionTiming() {
-    return _infectionTiming;
 }
