@@ -66,3 +66,10 @@ int Map::countInfested() {
     }
     return count;
 }
+
+float Map::percentageInfested(){
+   int nbIndestedTiles= countInfested();
+   int nbTotalTiles= _tiles.size();
+   float percentage = ((float)nbIndestedTiles/(float)nbTotalTiles);
+    return percentage;
+}

@@ -4,7 +4,7 @@ Le jeu que nous vous proposons est un jeu à la fois passif et actif. Il met en 
 Le but du jeu est que toute la population soit infectée par le virus. Pour cela, il y a différents endroits sue lesquels nous pouvons introduire 
 le virus. Ensuite, celui ci va se propager sur l’ensemble des cellules qui lui sont adjacentes. Étant donné que certaines villes proposent des 
 trajets d’avion vers d’autres villes, il est possible, une fois que le virus a atteint une ville,qu’il se propage vers de nouveaux horizons. 
-Ainsi, il peut facilement franchir les grandes étendues d’eau pour conquérir le monde. 
+Ainsi, il peut facilement franchir les grandes étendues d’eau pour conquérir le monde.
 
 
 
@@ -12,7 +12,7 @@ Conditions de lancement du jeu :
 
 Afin d’accéder au jeu dans de bonnes conditions, il faut lancer la commande « make » dans votre terminal. 
 Cette commande va compiler l’ensemble des fichiers nécessaire pour jouer au jeu. 
-Ensuite, nous vous conseillons de dézoomer votre terminal avec le raccourci « ctrl - ». 
+Ensuite, nous vous conseillons de dézoomer votre terminal avec le raccourci « ctrl - ». (pensez a le faire plusieurs fois)
 Une fois ces commandes faites, vous pouvez faire la commande « ./launch » qui lancera le jeu. 
 Une fois le jeu lancé, la carte du monde apparaît dans votre terminal. 
 Vous retrouvez en bas à gauche une fenêtre pour réaliser des actions selon les indications qui vous sont faites. 
