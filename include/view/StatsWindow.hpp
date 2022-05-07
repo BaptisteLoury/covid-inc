@@ -8,12 +8,12 @@
 
 class StatsWindow : virtual public AbstractWindow {
 private:
-        Virus _virus;
-        Map _map;
+        Virus * _virus;
+        Map * _map;
 
         std::string timeDecorator();
 public:
-        StatsWindow(Virus &virus, Map &map);
+        StatsWindow(Virus * virus, Map * map);
         void draw();
 };
 
