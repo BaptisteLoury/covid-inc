@@ -10,8 +10,9 @@ LegendWindow::LegendWindow()
 void LegendWindow::draw() {
      wattron(_win,A_BOLD);
 
-    
-        mvwprintw(_win,0,3,"LEGENDE: ");
+        wattron(_win,A_UNDERLINE);
+            mvwprintw(_win,0,3,"LEGENDE:");
+        wattroff(_win,A_UNDERLINE);
     
     
         mvwprintw(_win,0,20," \(vide\)-> l'eau");
@@ -44,7 +45,7 @@ void LegendWindow::draw() {
 
 
    
-    // éléments infectées 
+    // éléments infectés 
 
         wattron(_win,COLOR_PAIR(11));
                 mvwprintw(_win,0,190,"[A-Z][1-5][:]");
@@ -53,3 +54,6 @@ void LegendWindow::draw() {
      wattron(_win,A_BOLD);
 
 }
+
+
+

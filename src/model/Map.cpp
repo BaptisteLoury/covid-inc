@@ -44,3 +44,7 @@ std::vector<std::vector<AbstractTile *>> Map::getTiles() {
 std::vector<SpawnTile *> Map::getSpawnTiles() {
     return _spawnTiles;
 }
+
+void Map::addInfested(LandTile * tile) {
+    _infestedTiles.push_back(tile);
+}
