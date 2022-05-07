@@ -44,15 +44,3 @@ std::vector<std::vector<AbstractTile *>> Map::getTiles() {
 std::vector<SpawnTile *> Map::getSpawnTiles() {
     return _spawnTiles;
 }
-
-void Map::pauseTimers() {
-    for(int i=0; i < _infestedTiles.size(); i++) {
-        _infestedTiles[i]->getInfectedTime().Stop();
-    }
-}
-
-void Map::resumeTimers() {
-    for(int i=0; i < _infestedTiles.size(); i++) {
-        _infestedTiles[i]->getInfectedTime().Start();
-    }
-}
