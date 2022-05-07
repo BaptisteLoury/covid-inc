@@ -27,6 +27,7 @@ public:
         int getNbLandTiles();
         void addTile(int x, int y, char c, std::vector<AbstractTile *>& v);
         void addInfested(LandTile * tile);
+        void removeInfested(LandTile * tile);
 
         int countInfested();
 };

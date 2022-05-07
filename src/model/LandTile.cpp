@@ -2,7 +2,6 @@
 #include "model/Map.hpp"
 #include <algorithm>
 #include <iostream>
-#include <fstream>
 
 LandTile::LandTile(int x, int y) : LandTile(TileType::LAND, ":", x, y) {}
 LandTile::LandTile(TileType t, const char * c,int x, int y)
@@ -12,10 +11,14 @@ LandTile::LandTile() {}
 
 std::vector<LandTile *> LandTile::getNeighbours(std::vector<std::vector<AbstractTile *>> &carte) {
     std::vector<LandTile *> neighbours;
-    addNeighbIfLandTile(carte[_posX+1][_posY], neighbours);
-    addNeighbIfLandTile(carte[_posX-1][_posY], neighbours);
-    addNeighbIfLandTile(carte[_posX][_posY+1], neighbours);
-    addNeighbIfLandTile(carte[_posX][_posY-1], neighbours);
+    if(_posX+1 < carte.size())
+        addNeighbIfLandTile(carte[_posX+1][_posY], neighbours);
+    if(_posX-1 >= 0)
+        addNeighbIfLandTile(carte[_posX-1][_posY], neighbours);
+    if(_posY+1 < carte[_posX].size())
+        addNeighbIfLandTile(carte[_posX][_posY+1], neighbours);
+    if(_posY-1 >= 0)
+        addNeighbIfLandTile(carte[_posX][_posY-1], neighbours);
     return neighbours;
 }
 
@@ -78,21 +81,13 @@ void LandTile::spreadVirus(Map& map) {
     if(isInfected()) {
 
         std::vector<LandTile *> neighbours = getNeighbours(carte);
-
-                    std::ofstream file;
-    file.open("log.err", std::ios::app);
-    file<< "pre:" << _posX << ":" << _posY << ":" << map.getInfestedTiles().size() << "\n";
         
 
         for(int i=0; i < neighbours.size(); i++) {
             if(!neighbours[i]->isInfected()) {
                 neighbours[i]->infect();
                 map.addInfested(neighbours[i]);
-        file<< "during:" << neighbours[i]->getX() << ":" << neighbours[i]->getY() << "\n";
             }
         }
-    file<< "post:" << _posX << ":" << _posY << ":" << map.getInfestedTiles().size() << "\n";
-    file<< "count:"  << map.countInfested() << "\n\n";
-    file.close();
     }
 }

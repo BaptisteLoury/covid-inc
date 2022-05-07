@@ -3,6 +3,8 @@
 #include <iostream>
 #include "model/Severity.hpp"
 
+std::vector<std::vector<LandTile *>> CityTile::ASSO = {};
+
 CityTile::CityTile(int x, int y, const char * c) :  AbstractTile(TileType::CITY, c, x, y) {
     _virus = VirusSeverity::NONE;
     bool found = false;
@@ -21,11 +23,19 @@ CityTile::CityTile(int x, int y, const char * c) :  AbstractTile(TileType::CITY,
     if(!found) {
             _cityGroup = i-1;
     }
-
+    if(ASSO.size() == 0) {
+        for(int i=0; i < 5; i++) {
+            ASSO.push_back({});
+        }
+    }
+    ASSO[_cityGroup].push_back(this);
 }
 
 std::vector<LandTile *> CityTile::getNeighbours(std::vector<std::vector<AbstractTile *>> &carte) {
-    return LandTile::getNeighbours(carte);
+    std::vector<LandTile *> relatedCities = LandTile::getNeighbours(carte);
+    std::vector<LandTile *> a = getCityAsso();
+    relatedCities.insert(relatedCities.end(), a.begin(), a.end());
+    return relatedCities;
 }
 
 void CityTile::draw(WINDOW * w,int x, int y) {
@@ -42,4 +52,14 @@ void CityTile::draw(WINDOW * w,int x, int y) {
         wattroff(w,COLOR_PAIR(_cityGroup + 1));
     }
     wattroff(w,A_BOLD | A_UNDERLINE);
+}
+
+std::vector<LandTile *> CityTile::getCityAsso() {
+    std::vector<LandTile *> asso;
+    for(int i=0; i < ASSO[_cityGroup].size(); i++) {
+        if(ASSO[_cityGroup][i] != this) {
+            asso.push_back(ASSO[_cityGroup][i]);
+        }
+    }
+    return asso;
 }

@@ -29,12 +29,10 @@ void VirusController::checkSpawns(Map& map) {
     }
 }
 
+
 void VirusController::tickVirus(Map& map) {
 
     std::vector<LandTile *> infected = map.getInfestedTiles();
-
-
-
 
     for(int i=0; i < infected.size(); i++) {
 
@@ -42,7 +40,7 @@ void VirusController::tickVirus(Map& map) {
 
         if(infected[i]->getInfectionTimeLeft() < 1) {
             infected[i]->cure();
-            std::remove(infected.begin(), infected.end(), infected[i]);
+            map.removeInfested(infected[i]);
         }
         else {
 

@@ -66,3 +66,21 @@ int Map::countInfested() {
     }
     return count;
 }
+
+void Map::removeInfested(LandTile * tile) {
+    bool found = false;
+    int i = 0;
+    while(i < _infestedTiles.size() && !found) {
+        if(_infestedTiles[i] == tile) {
+            found = true;
+        }
+        else {
+            i++;
+        }
+    }
+    while(i < _infestedTiles.size() - 1) {
+        _infestedTiles[i] = _infestedTiles[i+1];
+        i++;
+    }
+    _infestedTiles.pop_back();
+}
