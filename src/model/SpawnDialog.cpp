@@ -1,5 +1,6 @@
 #include "model/SpawnDialog.hpp"
 #include "utils/DialogUtils.hpp"
+#include <stdexcept>
 
 SpawnDialog::SpawnDialog() : AbstractDialog() {}
 

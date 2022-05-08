@@ -1,5 +1,6 @@
 #include "model/LevelUpDialog.hpp"
 #include "utils/DialogUtils.hpp"
+#include <stdexcept>
 
 LevelUpDialog::LevelUpDialog() : AbstractDialog() {}
 
